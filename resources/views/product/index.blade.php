@@ -31,23 +31,23 @@
 
                     {{-- Table --}}
                     <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
+                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th
-                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider w-8">
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider w-8">
                                         #</th>
                                     <th
-                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Name</th>
                                     <th
-                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Quantity</th>
                                     <th
-                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Price</th>
                                     <th
-                                        class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                         Owner</th>
                                     <th
                                         class="px-6 py-3 text-center text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -57,22 +57,27 @@
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700">
                                 @forelse ($products as $product)
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition duration-100">
-                                        <td class="px-6 py-4 text-gray-400 dark:text-gray-500">
+                                        <td class="px-6 py-4 text-center text-gray-400 dark:text-gray-500">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="px-6 py-4 font-medium text-gray-800 dark:text-gray-100">
+                                        <td class="px-6 py-4 text-center font-medium text-gray-800 dark:text-gray-100">
                                             {{ $product->name }}
                                         </td>
-                                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
+                                        <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">
                                             <span
                                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                {{ $product->quantity > 10 ? 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' }}">
-                                                {{ $product->quantity }}
+                                                {{ $product->qty > 10 ? 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' }}">
+                                                {{ $product->qty }}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-gray-700 dark:text-gray-200 font-mono">
+                                        <td class="px-6 py-4 text-center text-gray-700 dark:text-gray-200 font-mono">
                                             Rp {{ number_format($product->price, 0, ',', '.') }}
                                         </td>
+
+                                        <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">
+                                            {{ $product->user->name ?? 'Unknown' }}
+                                        </td>
+
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center gap-2">
                                                 <a href="{{ route('product.show', $product->id) }}"
