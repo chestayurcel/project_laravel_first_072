@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -27,9 +28,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $users = User::orderBy('name')->get();
-
-        return view('product.create', compact('users'));
+        $categories = Category::all();
+        $users = User::all();
+        return view('product.create', compact('categories', 'users'));
     }
 
     public function show($id)

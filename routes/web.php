@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,5 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/about', [AboutController::class, 'index'])->middleware(['auth', 'verified'])->name('about');
+
+Route::resource('category', CategoryController::class)->middleware('can:manage-category');
 
 require __DIR__.'/auth.php';
